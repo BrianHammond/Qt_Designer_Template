@@ -1,6 +1,6 @@
 # checks to see if the 'PyQT6' module is installed
 try: 
-    from PyQt6.QtWidgets import QApplication, QMainWindow
+    from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget
     from PyQt6 import uic
 except ModuleNotFoundError: # if it's not then it will automatically be installed
     print("PyQT6 module is not installed")
@@ -34,7 +34,7 @@ class UI(QMainWindow):
         self.text.clear()
 
     def about(self):
-        self.window = QMainWindow()
+        self.window = QWidget()
         uic.loadUi("about.ui", self.window) #load the UI file
         self.window.show()
 
