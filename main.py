@@ -1,7 +1,6 @@
 # checks to see if the 'PyQT6' module is installed
 try: 
-    from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget
-    from PyQt6 import uic
+    from PyQt6 import *
 except ModuleNotFoundError: # if it's not then it will automatically be installed
     print("PyQT6 module is not installed")
     import subprocess
@@ -10,37 +9,11 @@ except ModuleNotFoundError: # if it's not then it will automatically be installe
         subprocess.call(['pip', 'install', package])
 
 import sys
-from PyQt6.QtWidgets import QMainWindow, QApplication
-from PyQt6 import uic
+from PyQt6.QtWidgets import QApplication
+from user_interface import UserInterface
 
-class UI(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        uic.loadUi("main.ui", self) #load the UI file
-
-        #define our widgets
-        self.text_field.returnPressed.connect(self.display_text) 
-        self.push_button.clicked.connect(self.display_text)
-
-        #menubar
-        self.actionAbout.triggered.connect(self.about)
-
-        #fields
-        self.text = self.text_field
-      
-    def display_text(self):
-        print(self.text.text())
-        self.label.setText(self.text.text())
-        self.text.clear()
-
-    def about(self):
-        self.window = QWidget()
-        uic.loadUi("about.ui", self.window) #load the UI file
-        self.window.show()
-
-# Show/Run app
 if __name__ == "__main__":
     app = QApplication(sys.argv) # needs to run first
-    UIWindow = UI()
-    UIWindow.show()
+    UserInterface = UserInterface()
+    UserInterface.show()
     sys.exit(app.exec())
