@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QMainWindow, QWidget
 from PyQt6 import uic
 
-class UserInterface(QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi("main.ui", self) #load the UI file
@@ -13,13 +13,10 @@ class UserInterface(QMainWindow):
         #menubar
         self.actionAbout.triggered.connect(self.about)
 
-        #fields
-        self.text = self.text_field
-      
     def display_text(self):
-        print(self.text.text())
-        self.label.setText(self.text.text())
-        self.text.clear()
+        print(self.text_field.text())
+        self.label.setText(self.text_field.text())
+        self.text_field.clear()
 
     def about(self):
         self.window = QWidget()

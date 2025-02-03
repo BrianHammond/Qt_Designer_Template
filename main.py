@@ -10,10 +10,10 @@ except ModuleNotFoundError: # if it's not then it will automatically be installe
 
 import sys
 from PyQt6.QtWidgets import QApplication
-from user_interface import UserInterface
+from main_window import MainWindow
 
 if __name__ == "__main__":
     app = QApplication(sys.argv) # needs to run first
-    UserInterface = UserInterface()
-    UserInterface.show()
+    MainWindow = MainWindow()
+    MainWindow.show()
     sys.exit(app.exec())
