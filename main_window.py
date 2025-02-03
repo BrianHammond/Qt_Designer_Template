@@ -14,7 +14,6 @@ class MainWindow(QMainWindow):
         self.actionAbout.triggered.connect(self.about)
         self.actionAbout_Qt.triggered.connect(self.about_qt)
 
-
     def display_text(self):
         print(self.text_field.text())
         self.label.setText(self.text_field.text())
