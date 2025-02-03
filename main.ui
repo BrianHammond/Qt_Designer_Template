@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>562</width>
-    <height>354</height>
+    <width>590</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -110,7 +110,7 @@
       <property name="sizeHint" stdset="0">
        <size>
         <width>20</width>
-        <height>106</height>
+        <height>100</height>
        </size>
       </property>
      </spacer>
@@ -123,7 +123,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>562</width>
+     <width>590</width>
      <height>21</height>
     </rect>
    </property>
@@ -132,12 +132,18 @@
      <string>Help</string>
     </property>
     <addaction name="actionAbout"/>
+    <addaction name="actionAbout_Qt"/>
    </widget>
    <addaction name="menuAbout"/>
   </widget>
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>About Qt</string>
    </property>
   </action>
  </widget>

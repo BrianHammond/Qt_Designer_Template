@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMainWindow, QWidget
+from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget
 from PyQt6 import uic
 
 class MainWindow(QMainWindow):
@@ -12,6 +12,8 @@ class MainWindow(QMainWindow):
 
         #menubar
         self.actionAbout.triggered.connect(self.about)
+        self.actionAbout_Qt.triggered.connect(self.about_qt)
+
 
     def display_text(self):
         print(self.text_field.text())
@@ -23,3 +25,5 @@ class MainWindow(QMainWindow):
         uic.loadUi("about.ui", self.window) #load the UI file
         self.window.show()
 
+    def about_qt(self):
+        QApplication.aboutQt()
