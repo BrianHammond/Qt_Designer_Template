@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget
+from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog
 from PyQt6 import uic
 
 class MainWindow(QMainWindow):
@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
         self.text_field.clear()
 
     def about(self):
-        self.window = QWidget()
+        self.window = QDialog()
         uic.loadUi("about.ui", self.window) #load the UI file
         self.window.show()
 
