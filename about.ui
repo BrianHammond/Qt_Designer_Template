@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>icon/ms_icon.jpg</normaloff>icon/ms_icon.jpg</iconset>
+    <normaloff>images/ms_icon.jpg</normaloff>images/ms_icon.jpg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
