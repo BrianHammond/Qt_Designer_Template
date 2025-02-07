@@ -4,4 +4,4 @@ from about_ui import Ui_MainWindow as about_ui
 class AboutWindow(QMainWindow, about_ui):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
+        self.setupUi(self) # loads the about_ui file

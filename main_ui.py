@@ -16,9 +16,8 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QLabel, QLineEdit, QMainWindow,
-    QMenu, QMenuBar, QPushButton, QSizePolicy,
-    QStatusBar, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QMainWindow, QMenu, QMenuBar,
+    QSizePolicy, QStatusBar, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -46,37 +45,6 @@ class Ui_MainWindow(object):
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(10, 10, 10, 10)
-        self.text_field = QLineEdit(self.centralwidget)
-        self.text_field.setObjectName(u"text_field")
-        font = QFont()
-        font.setPointSize(16)
-        self.text_field.setFont(font)
-
-        self.verticalLayout.addWidget(self.text_field)
-
-        self.push_button = QPushButton(self.centralwidget)
-        self.push_button.setObjectName(u"push_button")
-        sizePolicy.setHeightForWidth(self.push_button.sizePolicy().hasHeightForWidth())
-        self.push_button.setSizePolicy(sizePolicy)
-        self.push_button.setMinimumSize(QSize(90, 30))
-        font1 = QFont()
-        font1.setPointSize(10)
-        self.push_button.setFont(font1)
-
-        self.verticalLayout.addWidget(self.push_button)
-
-        self.label = QLabel(self.centralwidget)
-        self.label.setObjectName(u"label")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
-        self.label.setSizePolicy(sizePolicy1)
-        self.label.setMinimumSize(QSize(0, 40))
-        self.label.setStyleSheet(u"font: 12pt \"MS Shell Dlg 2\";")
-
-        self.verticalLayout.addWidget(self.label)
-
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -101,9 +69,6 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"UI Test Program", None))
         self.actionAbout.setText(QCoreApplication.translate("MainWindow", u"About", None))
         self.actionAbout_Qt.setText(QCoreApplication.translate("MainWindow", u"About Qt", None))
-        self.text_field.setPlaceholderText(QCoreApplication.translate("MainWindow", u"type something here...press enter", None))
-        self.push_button.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Message Output", None))
         self.menuAbout.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))
     # retranslateUi
 

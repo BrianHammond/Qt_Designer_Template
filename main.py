@@ -6,21 +6,12 @@ from about_window import AboutWindow
 class MainWindow(QMainWindow, main_ui):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
+        self.setupUi(self) # loads main_ui
 
-        #define our widgets
-        self.text_field.returnPressed.connect(self.display_text) 
-        self.push_button.clicked.connect(self.display_text)
-
-        #menubar
+        # menubar
         self.actionAbout.triggered.connect(self.show_about)
         self.actionAbout_Qt.triggered.connect(self.about_qt)
 
-    def display_text(self):
-        print(self.text_field.text())
-        self.label.setText(self.text_field.text())
-        self.text_field.clear()
-        
     def about_qt(self):
         QApplication.aboutQt()
 
