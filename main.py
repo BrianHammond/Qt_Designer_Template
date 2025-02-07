@@ -2,7 +2,6 @@ import sys
 from PySide6.QtWidgets import QApplication, QMainWindow
 from main_ui import Ui_MainWindow as main_ui
 from about_ui import Ui_MainWindow as about_ui
-import resources_rc
 
 class MainWindow(QMainWindow, main_ui):
     def __init__(self):
