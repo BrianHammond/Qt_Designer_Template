@@ -21,6 +21,7 @@ class MainWindow(QMainWindow, main_ui):
 
     def dark_mode(self, checked):
         if checked:
+            print(checked)
             self.setStyleSheet(qdarkstyle.load_stylesheet_pyside6())
         else:
             self.setStyleSheet('')
