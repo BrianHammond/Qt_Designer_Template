@@ -17,8 +17,8 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QLabel, QMainWindow, QMenu,
-    QMenuBar, QRadioButton, QSizePolicy, QStatusBar,
-    QVBoxLayout, QWidget)
+    QMenuBar, QSizePolicy, QStatusBar, QVBoxLayout,
+    QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -36,23 +36,27 @@ class Ui_MainWindow(object):
         icon = QIcon()
         icon.addFile(u":/images/ms_icon.jpg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         MainWindow.setWindowIcon(icon)
-        self.actionAbout = QAction(MainWindow)
-        self.actionAbout.setObjectName(u"actionAbout")
-        self.actionAbout_Qt = QAction(MainWindow)
-        self.actionAbout_Qt.setObjectName(u"actionAbout_Qt")
+        self.action_about = QAction(MainWindow)
+        self.action_about.setObjectName(u"action_about")
+        self.action_about_qt = QAction(MainWindow)
+        self.action_about_qt.setObjectName(u"action_about_qt")
+        self.actionSettings = QAction(MainWindow)
+        self.actionSettings.setObjectName(u"actionSettings")
+        self.action_darkmode = QAction(MainWindow)
+        self.action_darkmode.setObjectName(u"action_darkmode")
+        self.action_darkmode.setCheckable(True)
+        self.action_darkmode.setChecked(False)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(10, 10, 10, 10)
-        self.rb_darkmode = QRadioButton(self.centralwidget)
-        self.rb_darkmode.setObjectName(u"rb_darkmode")
-
-        self.verticalLayout.addWidget(self.rb_darkmode)
-
         self.label = QLabel(self.centralwidget)
         self.label.setObjectName(u"label")
+        font = QFont()
+        font.setPointSize(48)
+        self.label.setFont(font)
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout.addWidget(self.label)
@@ -66,11 +70,15 @@ class Ui_MainWindow(object):
         self.menuBar.setGeometry(QRect(0, 0, 480, 22))
         self.menuAbout = QMenu(self.menuBar)
         self.menuAbout.setObjectName(u"menuAbout")
+        self.menuSetting = QMenu(self.menuBar)
+        self.menuSetting.setObjectName(u"menuSetting")
         MainWindow.setMenuBar(self.menuBar)
 
+        self.menuBar.addAction(self.menuSetting.menuAction())
         self.menuBar.addAction(self.menuAbout.menuAction())
-        self.menuAbout.addAction(self.actionAbout)
-        self.menuAbout.addAction(self.actionAbout_Qt)
+        self.menuAbout.addAction(self.action_about)
+        self.menuAbout.addAction(self.action_about_qt)
+        self.menuSetting.addAction(self.action_darkmode)
 
         self.retranslateUi(MainWindow)
 
@@ -79,10 +87,12 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"UI Test Program", None))
-        self.actionAbout.setText(QCoreApplication.translate("MainWindow", u"About", None))
-        self.actionAbout_Qt.setText(QCoreApplication.translate("MainWindow", u"About Qt", None))
-        self.rb_darkmode.setText(QCoreApplication.translate("MainWindow", u"Dark Mode", None))
+        self.action_about.setText(QCoreApplication.translate("MainWindow", u"About", None))
+        self.action_about_qt.setText(QCoreApplication.translate("MainWindow", u"About Qt", None))
+        self.actionSettings.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
+        self.action_darkmode.setText(QCoreApplication.translate("MainWindow", u"Dark Mode", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Hello World", None))
         self.menuAbout.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))
+        self.menuSetting.setTitle(QCoreApplication.translate("MainWindow", u"Setting", None))
     # retranslateUi
 
