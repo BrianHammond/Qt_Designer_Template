@@ -38,18 +38,16 @@ class MainWindow(QMainWindow, main_ui):
         self.settings.setValue('window_pos', self.pos())
         self.settings.setValue('dark_mode', self.action_darkmode.isChecked())
         event.accept()
-#
+
     def load_settings(self):
-        print("load settings")
         size = self.settings.value('window_size', None)
         pos = self.settings.value('window_pos', None)
-        dark = self.settings.value('dark_mode', 'false')
+        dark = self.settings.value('dark_mode')
         if size is not None:
             self.resize(size)
         if pos is not None:
             self.move(pos)
         if dark == 'true':
-            print("the setting is true")
             self.action_darkmode.setChecked(True)
             self.setStyleSheet(qdarkstyle.load_stylesheet_pyside6())
 
