@@ -10,7 +10,7 @@ class MainWindow(QMainWindow, main_ui):
         super().__init__()
         self.setupUi(self) # loads main_ui
         self.settings = QSettings('settings.ini', QSettings.IniFormat)
-        self.load_settings()
+        self.loadSettings()
 
         # buttons
         self.action_darkmode.toggled.connect(self.dark_mode)
@@ -32,14 +32,13 @@ class MainWindow(QMainWindow, main_ui):
         self.about_window = AboutWindow()
         self.about_window.show()
 
-    def closeEvent(self, event):
-        print("save settings")
+    def closeEvent(self, event): #settings will save when closing the app
         self.settings.setValue('window_size', self.size())
         self.settings.setValue('window_pos', self.pos())
         self.settings.setValue('dark_mode', self.action_darkmode.isChecked())
         event.accept()
 
-    def load_settings(self):
+    def loadSettings(self): #settings will load when opening the app
         size = self.settings.value('window_size', None)
         pos = self.settings.value('window_pos', None)
         dark = self.settings.value('dark_mode')
