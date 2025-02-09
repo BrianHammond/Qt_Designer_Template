@@ -9,6 +9,8 @@ class MainWindow(QMainWindow, main_ui):
     def __init__(self):
         super().__init__()
         self.setupUi(self) # loads main_ui
+        self.settings = QSettings('settings.ini', QSettings.IniFormat)
+        self.load_settings()
 
         # buttons
         self.action_darkmode.toggled.connect(self.dark_mode)
@@ -17,11 +19,8 @@ class MainWindow(QMainWindow, main_ui):
         self.action_about.triggered.connect(self.show_about)
         self.action_about_qt.triggered.connect(self.about_qt)
 
-        self.load_settings()
-
     def dark_mode(self, checked):
         if checked:
-            print(checked)
             self.setStyleSheet(qdarkstyle.load_stylesheet_pyside6())
         else:
             self.setStyleSheet('')
@@ -34,24 +33,24 @@ class MainWindow(QMainWindow, main_ui):
         self.about_window.show()
 
     def closeEvent(self, event):
-        # Save window settings with QSettings to an INI file
-        settings = QSettings('settings.ini', QSettings.IniFormat)
-        settings.setValue('window_size', self.size())
-        settings.setValue('window_pos', self.pos())
-        settings.setValue('dark_mode', self.action_darkmode.isChecked())
+        print("save settings")
+        self.settings.setValue('window_size', self.size())
+        self.settings.setValue('window_pos', self.pos())
+        self.settings.setValue('dark_mode', self.action_darkmode.isChecked())
         event.accept()
-
+#
     def load_settings(self):
-        # Load window settings with QSettings from an INI file
-        settings = QSettings('settings.ini', QSettings.IniFormat)
-        size = settings.value('window_size', None)
-        pos = settings.value('window_pos', None)
-        dark = settings.value('dark_mode')
+        print("load settings")
+        size = self.settings.value('window_size', None)
+        pos = self.settings.value('window_pos', None)
+        dark = self.settings.value('dark_mode', 'false')
         if size is not None:
             self.resize(size)
         if pos is not None:
             self.move(pos)
         if dark == 'true':
+            print("the setting is true")
+            self.action_darkmode.setChecked(True)
             self.setStyleSheet(qdarkstyle.load_stylesheet_pyside6())
 
 if __name__ == "__main__":
