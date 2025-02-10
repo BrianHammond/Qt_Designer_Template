@@ -93,6 +93,6 @@ class Ui_MainWindow(object):
         self.actionDarkMode.setText(QCoreApplication.translate("MainWindow", u"Dark Mode", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Hello World", None))
         self.menuAbout.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))
-        self.menuSetting.setTitle(QCoreApplication.translate("MainWindow", u"Setting", None))
+        self.menuSetting.setTitle(QCoreApplication.translate("MainWindow", u"Settings", None))
     # retranslateUi
 
