@@ -12,12 +12,10 @@ class MainWindow(QMainWindow, main_ui):
         self.settings = QSettings('settings.ini', QSettings.IniFormat)
         self.loadSettings()
 
-        # buttons
-        self.action_darkmode.toggled.connect(self.dark_mode)
-        
         # menubar
-        self.action_about.triggered.connect(self.show_about)
-        self.action_about_qt.triggered.connect(self.about_qt)
+        self.actionDarkMode.toggled.connect(self.dark_mode)
+        self.actionAbout.triggered.connect(self.show_about)
+        self.actionAboutQt.triggered.connect(self.about_qt)
 
     def dark_mode(self, checked):
         if checked:
@@ -35,7 +33,7 @@ class MainWindow(QMainWindow, main_ui):
     def closeEvent(self, event): #settings will save when closing the app
         self.settings.setValue('window_size', self.size())
         self.settings.setValue('window_pos', self.pos())
-        self.settings.setValue('dark_mode', self.action_darkmode.isChecked())
+        self.settings.setValue('dark_mode', self.actionDarkMode.isChecked())
         event.accept()
 
     def loadSettings(self): #settings will load when opening the app
@@ -47,7 +45,7 @@ class MainWindow(QMainWindow, main_ui):
         if pos is not None:
             self.move(pos)
         if dark == 'true':
-            self.action_darkmode.setChecked(True)
+            self.actionDarkMode.setChecked(True)
             self.setStyleSheet(qdarkstyle.load_stylesheet_pyside6())
 
 if __name__ == "__main__":
