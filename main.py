@@ -1,8 +1,8 @@
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget
 from PySide6.QtCore import QSettings
 from main_ui import Ui_MainWindow as main_ui
-from about_window import AboutWindow
+from about_ui import Ui_Form as about_ui
 import qdarkstyle
 
 class MainWindow(QMainWindow, main_ui):
@@ -47,6 +47,11 @@ class MainWindow(QMainWindow, main_ui):
         if dark == 'true':
             self.actionDarkMode.setChecked(True)
             self.setStyleSheet(qdarkstyle.load_stylesheet_pyside6())
+
+class AboutWindow(QWidget, about_ui):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv) # needs to run first
