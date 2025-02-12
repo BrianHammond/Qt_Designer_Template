@@ -10,7 +10,7 @@ class MainWindow(QMainWindow, main_ui):
         super().__init__()
         self.setupUi(self) # loads main_ui
         self.settings = QSettings('settings.ini', QSettings.IniFormat)
-        self.loadSettings()
+        self.loadEvent()
 
         # menubar
         self.actionDarkMode.toggled.connect(self.dark_mode)
@@ -23,20 +23,20 @@ class MainWindow(QMainWindow, main_ui):
         else:
             self.setStyleSheet('')
 
-    def about_qt(self):
+    def about_qt(self): #loads the About Qt window
         QApplication.aboutQt()
 
-    def show_about(self):
+    def show_about(self):#loads the About window
         self.about_window = AboutWindow()
         self.about_window.show()
 
-    def closeEvent(self, event): #settings will save when closing the app
+    def closeEvent(self, event): #settings will save when closing the app (module name needs to be named closeEvent)
         self.settings.setValue('window_size', self.size())
         self.settings.setValue('window_pos', self.pos())
         self.settings.setValue('dark_mode', self.actionDarkMode.isChecked())
         event.accept()
 
-    def loadSettings(self): #settings will load when opening the app
+    def loadEvent(self): #settings will load when opening the app
         size = self.settings.value('window_size', None)
         pos = self.settings.value('window_pos', None)
         dark = self.settings.value('dark_mode')
@@ -48,7 +48,7 @@ class MainWindow(QMainWindow, main_ui):
             self.actionDarkMode.setChecked(True)
             self.setStyleSheet(qdarkstyle.load_stylesheet_pyside6())
 
-class AboutWindow(QWidget, about_ui):
+class AboutWindow(QWidget, about_ui): #configures the About window
     def __init__(self):
         super().__init__()
         self.setupUi(self)
