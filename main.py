@@ -27,12 +27,12 @@ class MainWindow(QMainWindow, main_ui): # used to display the main user interfac
         self.about_window = AboutWindow(dark_mode=self.action_dark_mode.isChecked())
         self.about_window.show()
 
+    def about_qt(self):  # loads the About Qt window
+        QApplication.aboutQt()
+
     def closeEvent(self, event):  # Save settings when closing the app
         self.settings_manager.save_settings()  # Save settings using the manager
         event.accept()
-
-    def about_qt(self):  # loads the About Qt window
-        QApplication.aboutQt()
 
 class SettingsManager: # used to load and save settings when opening and closing the app
     def __init__(self, main_window):
