@@ -1,9 +1,9 @@
 import sys
+import qdarkstyle
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget
 from PySide6.QtCore import QSettings
 from main_ui import Ui_MainWindow as main_ui
 from about_ui import Ui_Form as about_ui
-import qdarkstyle
 
 class MainWindow(QMainWindow, main_ui): # used to display the main user interface
     def __init__(self):
