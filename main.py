@@ -13,9 +13,9 @@ class MainWindow(QMainWindow, main_ui): # used to display the main user interfac
         self.settings_manager.load_settings()  # Load settings when the app starts
 
         # menubar
-        self.actionDarkMode.toggled.connect(self.dark_mode)
-        self.actionAbout.triggered.connect(self.show_about)
-        self.actionAboutQt.triggered.connect(self.about_qt)
+        self.action_dark_mode.toggled.connect(self.dark_mode)
+        self.action_about.triggered.connect(self.show_about)
+        self.action_about_qt.triggered.connect(self.about_qt)
 
     def dark_mode(self, checked):
         if checked:
@@ -24,7 +24,7 @@ class MainWindow(QMainWindow, main_ui): # used to display the main user interfac
             self.setStyleSheet('')
 
     def show_about(self):  # loads the About window
-        self.about_window = AboutWindow(dark_mode=self.actionDarkMode.isChecked())
+        self.about_window = AboutWindow(dark_mode=self.action_dark_mode.isChecked())
         self.about_window.show()
 
     def closeEvent(self, event):  # Save settings when closing the app
@@ -49,13 +49,13 @@ class SettingsManager: # used to load and save settings when opening and closing
         if pos is not None:
             self.main_window.move(pos)
         if dark == 'true':
-            self.main_window.actionDarkMode.setChecked(True)
+            self.main_window.action_dark_mode.setChecked(True)
             self.main_window.setStyleSheet(qdarkstyle.load_stylesheet_pyside6())
 
     def save_settings(self):
         self.settings.setValue('window_size', self.main_window.size())
         self.settings.setValue('window_pos', self.main_window.pos())
-        self.settings.setValue('dark_mode', self.main_window.actionDarkMode.isChecked())
+        self.settings.setValue('dark_mode', self.main_window.action_dark_mode.isChecked())
 
 class AboutWindow(QWidget, about_ui): # Configures the About window
     def __init__(self, dark_mode=False):
