@@ -1,6 +1,6 @@
 import sys
 import qdarkstyle
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QFileDialog
 from PySide6.QtCore import QSettings
 from main_ui import Ui_MainWindow as main_ui
 from about_ui import Ui_Form as about_ui
@@ -13,9 +13,27 @@ class MainWindow(QMainWindow, main_ui): # used to display the main user interfac
         self.settings_manager.load_settings()  # Load settings when the app starts
 
         # menubar
+        self.action_new.triggered.connect(self.new_file)
+        self.action_open.triggered.connect(self.open_file)
         self.action_dark_mode.toggled.connect(self.dark_mode)
         self.action_about.triggered.connect(self.show_about)
         self.action_about_qt.triggered.connect(self.about_qt)
+
+    def new_file(self):
+        self.filename = QFileDialog.getSaveFileName(self, 'create a new file', '', 'Data File (*.txt)',)
+
+        if not self.filename[0]:
+            return  # Do nothing if no file is selected
+        
+        self.setWindowTitle(self.filename[0].split('/')[-1])
+        try:
+            with open(self.filename[0], "w", encoding="utf-8") as file:
+                file.write("This is some sample text.\nHere is another line!")
+        except FileNotFoundError:
+            pass
+
+    def open_file(self):
+        print('open file')
 
     def dark_mode(self, checked):
         if checked:
