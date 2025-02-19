@@ -20,7 +20,7 @@ class MainWindow(QMainWindow, main_ui): # used to display the main user interfac
         self.action_about_qt.triggered.connect(self.about_qt)
 
     def new_file(self):
-        self.filename = QFileDialog.getSaveFileName(self, 'create a new file', '', 'Data File (*.txt)',)
+        self.filename = QFileDialog.getSaveFileName(self, 'Create a new file', '', 'Data File (*.txt)',)
 
         if not self.filename[0]:
             return  # Do nothing if no file is selected
@@ -28,12 +28,24 @@ class MainWindow(QMainWindow, main_ui): # used to display the main user interfac
         self.setWindowTitle(self.filename[0].split('/')[-1])
         try:
             with open(self.filename[0], "w", encoding="utf-8") as file:
-                file.write("This is some sample text.\nHere is another line!")
+                file.write("This is some sample text\nHere is another line")
         except FileNotFoundError:
             pass
 
     def open_file(self):
-        print('open file')
+        self.filename = QFileDialog.getOpenFileName(self, 'Open file', '', 'Data File (*.txt)',)
+        
+        if not self.filename[0]:
+            return  # Do nothing if no file is selected
+
+        self.setWindowTitle(self.filename[0].split('/')[-1])
+
+        try:
+            with open(self.filename[0], "r", encoding="utf-8") as file:
+                file_content = file.read()
+                self.label.setText(file_content)
+        except FileNotFoundError:
+            pass
 
     def dark_mode(self, checked):
         if checked:
