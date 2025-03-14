@@ -1,9 +1,9 @@
 import sys
 import qdarkstyle
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QFileDialog
+from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QFileDialog
 from PySide6.QtCore import QSettings
 from main_ui import Ui_MainWindow as main_ui
-from about_ui import Ui_Form as about_ui
+from about_ui import Ui_Dialog as about_ui
 
 class MainWindow(QMainWindow, main_ui): # used to display the main user interface
     def __init__(self):
@@ -16,8 +16,8 @@ class MainWindow(QMainWindow, main_ui): # used to display the main user interfac
         self.action_new.triggered.connect(self.new_file)
         self.action_open.triggered.connect(self.open_file)
         self.action_dark_mode.toggled.connect(self.dark_mode)
-        self.action_about.triggered.connect(self.show_about)
         self.action_about_qt.triggered.connect(self.about_qt)
+        self.action_about.triggered.connect(self.about_window)
 
     def new_file(self):
         self.filename = QFileDialog.getSaveFileName(self, 'Create a new file', '', 'Data File (*.txt)',)
@@ -53,14 +53,14 @@ class MainWindow(QMainWindow, main_ui): # used to display the main user interfac
         else:
             self.setStyleSheet('')
 
-    def show_about(self):  # loads the About window
-        self.about_window = AboutWindow(dark_mode=self.action_dark_mode.isChecked())
-        self.about_window.show()
+    def about_window(self): # loads the About window
+        about_window = AboutWindow(dark_mode=self.action_dark_mode.isChecked())
+        about_window.exec()
 
-    def about_qt(self):  # loads the About Qt window
+    def about_qt(self): # loads the About Qt window
         QApplication.aboutQt()
 
-    def closeEvent(self, event):  # Save settings when closing the app
+    def closeEvent(self, event): # Save settings when closing the app
         self.settings_manager.save_settings()  # Save settings using the manager
         event.accept()
 
@@ -87,13 +87,13 @@ class SettingsManager: # used to load and save settings when opening and closing
         self.settings.setValue('window_pos', self.main_window.pos())
         self.settings.setValue('dark_mode', self.main_window.action_dark_mode.isChecked())
 
-class AboutWindow(QWidget, about_ui): # Configures the About window
+class AboutWindow(QDialog, about_ui): 
     def __init__(self, dark_mode=False):
         super().__init__()
         self.setupUi(self)
-
         if dark_mode:
             self.setStyleSheet(qdarkstyle.load_stylesheet_pyside6())
+        self.button_ok.clicked.connect(self.accept)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)  # needs to run first
