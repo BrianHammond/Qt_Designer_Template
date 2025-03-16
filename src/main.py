@@ -16,8 +16,8 @@ class MainWindow(QMainWindow, main_ui): # used to display the main user interfac
         self.action_new.triggered.connect(self.new_file)
         self.action_open.triggered.connect(self.open_file)
         self.action_dark_mode.toggled.connect(self.dark_mode)
-        self.action_about_qt.triggered.connect(self.about_qt)
-        self.action_about.triggered.connect(self.about_window)
+        self.action_about_qt.triggered.connect(lambda: QApplication.aboutQt())
+        self.action_about.triggered.connect(lambda: AboutWindow(dark_mode=self.action_dark_mode.isChecked()).exec())
 
     def new_file(self):
         self.filename = QFileDialog.getSaveFileName(self, 'Create a new file', '', 'Data File (*.txt)',)
@@ -53,13 +53,6 @@ class MainWindow(QMainWindow, main_ui): # used to display the main user interfac
         else:
             self.setStyleSheet('')
 
-    def about_window(self): # loads the About window
-        about_window = AboutWindow(dark_mode=self.action_dark_mode.isChecked())
-        about_window.exec()
-
-    def about_qt(self): # loads the About Qt window
-        QApplication.aboutQt()
-
     def closeEvent(self, event): # Save settings when closing the app
         self.settings_manager.save_settings()  # Save settings using the manager
         event.accept()
@@ -87,7 +80,7 @@ class SettingsManager: # used to load and save settings when opening and closing
         self.settings.setValue('window_pos', self.main_window.pos())
         self.settings.setValue('dark_mode', self.main_window.action_dark_mode.isChecked())
 
-class AboutWindow(QDialog, about_ui): 
+class AboutWindow(QDialog, about_ui): # this is the About Window
     def __init__(self, dark_mode=False):
         super().__init__()
         self.setupUi(self)
